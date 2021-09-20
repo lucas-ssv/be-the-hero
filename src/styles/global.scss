@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --background: #f0f0f5;
+  --backgroud-red-hero: #e02041;
+  --line-input: #dcdce6;
+  --background-input: #ffffff;
+  --text-secondary: #a8a8b3;
+  --text-primary: #737380;
+  --title-secondary: #41414d;
+  --title-primary: #13131a;
+}
+
+body {
+  font: 14px "Roboto", sans-serif;
+  color: var(--title-primary);
+  background: var(--background);
+}
+
+input,
+textarea {
+  font-family: Roboto;
+}
+
+button {
+  cursor: pointer;
+}
