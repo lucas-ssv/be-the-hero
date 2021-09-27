@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FiPower } from "react-icons/fi";
 import logo from "../assets/logo.svg";
 import "../styles/header.scss";
@@ -11,7 +12,9 @@ export function Header() {
         <span>Bem vindo, Lucas</span>
       </div>
       <div>
-        <button className="newCase">Cadastrar novo caso</button>
+        <Link to="/create" className="newCase">
+          Cadastrar novo caso
+        </Link>
         <button className="power">
           <FiPower size={24} color="#e02041" />
         </button>
