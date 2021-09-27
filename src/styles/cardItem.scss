@@ -1,0 +1,31 @@
+.cardItem {
+  background: #fff;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  position: relative;
+
+  strong {
+    font-size: 0.875rem;
+    color: var(--title-secondary);
+  }
+
+  p {
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    margin: 1rem 0;
+    line-height: 1.5rem;
+
+    &:nth-child(3n) {
+      margin-bottom: 0;
+    }
+  }
+
+  button {
+    background: none;
+    margin: 1.5rem 1.5rem 0 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
