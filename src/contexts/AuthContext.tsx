@@ -32,8 +32,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   });
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     const storage = localStorage.getItem("@bethehero:token");
+    const storageOrganization = localStorage.getItem("@bethehero:organization");
 
-    if (!storage) {
+    if (!storage || !storageOrganization) {
       return false;
     }
 
