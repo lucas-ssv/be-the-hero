@@ -1,0 +1,36 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+
+  div {
+    display: flex;
+    align-items: center;
+
+    span {
+      font-size: 1.25rem;
+      margin-left: 3rem;
+    }
+  }
+
+  img {
+    width: 160px;
+  }
+
+  button {
+    margin: 0;
+  }
+}
+
+.newCase {
+  padding: 1.2rem 2.5rem;
+}
+
+.power {
+  background: var(--background);
+  border: 1.5px solid var(--line-input);
+  margin-left: 1.5rem;
+  padding: 0.9rem;
+}
