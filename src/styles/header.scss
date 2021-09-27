@@ -19,13 +19,15 @@ header {
     width: 160px;
   }
 
-  button {
+  button,
+  .newCase {
     margin: 0;
+    text-decoration: none;
   }
 }
 
 .newCase {
-  padding: 1.2rem 2.5rem;
+  padding: 1.2rem 2.5rem !important;
 }
 
 .power {
