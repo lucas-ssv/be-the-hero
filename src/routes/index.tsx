@@ -4,6 +4,7 @@ import Route from "./Route";
 
 import { SignIn } from "../pages/SignIn";
 import { SignUp } from "../pages/SignUp";
+import { Create } from "../pages/Create";
 
 export function Routes() {
   return (
@@ -11,6 +12,7 @@ export function Routes() {
       <Route path="/" exact component={SignIn} />
       <Route path="/signup" component={SignUp} />
       <Route path="/list" component={List} isPrivate />
+      <Route path="/create" component={Create} isPrivate />
     </Switch>
   );
 }
