@@ -1,22 +1,38 @@
+import { useContext, useMemo } from "react";
 import { FiTrash2 } from "react-icons/fi";
+import { CaseContext } from "../../contexts/CaseContext";
 import "../../styles/cardItem.scss";
+import { priceFormat } from "../../utils/priceFormat";
 
-export function CardItem() {
+interface CaseProps {
+  caseData: {
+    id: string;
+    title: string;
+    description: string;
+    price: string;
+    organization_id: string;
+  };
+}
+
+export function CardItem({ caseData }: CaseProps) {
+  const { handleDeleteCase } = useContext(CaseContext);
+
+  const priceFormatted = useMemo(() => {
+    return priceFormat(caseData.price);
+  }, [caseData.price]);
+
   return (
     <div className="cardItem">
       <strong>CASO:</strong>
-      <p>Cadelinha atropelada</p>
+      <p>{caseData.title}</p>
 
       <strong>DESCRIÇÃO:</strong>
-      <p>
-        A cadelinha Jolie foi atropelada por um carro no bairro Santana e teve
-        que passar por uma cirurgia às pressas.
-      </p>
+      <p>{caseData.description}</p>
 
       <strong>VALOR:</strong>
-      <p>120,00 reais</p>
+      <p>{priceFormatted}</p>
 
-      <button type="button">
+      <button type="button" onClick={() => handleDeleteCase(caseData.id)}>
         <FiTrash2 size={20} color="#A8A8B3" />
       </button>
     </div>
