@@ -1,8 +1,11 @@
 import { createContext, ReactNode, useState } from "react";
+import { useHistory } from "react-router";
+import { toast } from "react-toastify";
 
 type AuthContextProps = {
   isAuthenticated: boolean;
   signIn: (organizationId: string) => Promise<void>;
+  signOut: () => void;
   organization: Organization;
 };
 
@@ -11,6 +14,7 @@ type AuthProviderProps = {
 };
 
 type Organization = {
+  id: string;
   name: string;
 };
 
@@ -19,6 +23,7 @@ export const AuthContext = createContext<AuthContextProps>(
 );
 
 export function AuthProvider({ children }: AuthProviderProps) {
+  const history = useHistory();
   const [organization, setOrganization] = useState<Organization>(() => {
     const storageOrganization = localStorage.getItem("@bethehero:organization");
 
@@ -50,7 +55,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         .then((response) => response.json())
         .then((data) => {
           if (data.error) {
-            console.log("deu ruim");
+            toast.error("Organização não encontrada!");
             return;
           }
 
@@ -59,10 +64,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
           localStorage.setItem("@bethehero:token", token);
           localStorage.setItem(
             "@bethehero:organization",
-            JSON.stringify({ name: organization.name })
+            JSON.stringify({ id: organization.id, name: organization.name })
           );
 
-          setOrganization({ name: organization.name });
+          setOrganization({ id: organization.id, name: organization.name });
           setIsAuthenticated(true);
         });
     } catch {
@@ -70,8 +75,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  function signOut() {
+    localStorage.removeItem("@bethehero:token");
+    localStorage.removeItem("@bethehero:organization");
+
+    setIsAuthenticated(false);
+    history.push("/create");
+  }
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, signIn, organization }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, signIn, signOut, organization }}
+    >
       {children}
     </AuthContext.Provider>
   );
