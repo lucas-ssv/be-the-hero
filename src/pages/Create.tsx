@@ -1,3 +1,4 @@
+import { FormEvent, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import { Input } from "../components/Input";
@@ -7,8 +8,33 @@ import "../styles/box.scss";
 import "../styles/create.scss";
 import { Button } from "../components/Button";
 import { Textarea } from "../components/Textarea";
+import { AuthContext } from "../contexts/AuthContext";
+import { CaseContext } from "../contexts/CaseContext";
 
 export function Create() {
+  const { organization } = useContext(AuthContext);
+  const { handleCreateCase } = useContext(CaseContext);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+
+  async function handleCreate(event: FormEvent) {
+    event.preventDefault();
+
+    const caseData = {
+      title,
+      description,
+      price,
+      organization_id: organization.id,
+    };
+
+    await handleCreateCase(caseData);
+
+    setTitle("");
+    setDescription("");
+    setPrice("");
+  }
+
   return (
     <section className="container">
       <main className="content">
@@ -21,13 +47,31 @@ export function Create() {
               resolver isso.
             </span>
           </div>
-          <form>
-            <Input type="text" placeholder="Título do caso" />
-            <Textarea placeholder="Descrição" rows={6} />
-            <Input type="text" placeholder="Valor em reais" />
+          <form onSubmit={handleCreate}>
+            <Input
+              type="text"
+              name="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Título do caso"
+            />
+            <Textarea
+              name="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Descrição"
+              rows={6}
+            />
+            <Input
+              type="text"
+              name="value"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              placeholder="Valor em reais"
+            />
 
             <div className="eventButtons">
-              <Button type="button">Cancelar</Button>
+              <button type="button">Cancelar</button>
               <Button type="submit">Cadastrar</Button>
             </div>
           </form>
