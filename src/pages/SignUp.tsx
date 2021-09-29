@@ -1,12 +1,48 @@
+import { Link, useHistory } from "react-router-dom";
+import { FormEvent, useState } from "react";
+import { toast } from "react-toastify";
 import { FiArrowLeft } from "react-icons/fi";
 import { Input } from "../components/Input";
 import logo from "../assets/logo.svg";
 import "../styles/common.scss";
 import "../styles/box.scss";
 import { Button } from "../components/Button";
-import { Link } from "react-router-dom";
 
 export function SignUp() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [city, setCity] = useState("");
+  const [uf, setUf] = useState("");
+
+  const history = useHistory();
+
+  async function handleCreateOng(event: FormEvent) {
+    event.preventDefault();
+
+    const organization = {
+      name,
+      email,
+      whatsapp,
+      city,
+      uf,
+    };
+
+    try {
+      await fetch("/api/organizations", {
+        method: "POST",
+        body: JSON.stringify(organization),
+      })
+        .then((response) => response.json())
+        .then(() => {
+          toast.success("Organização cadastrada com sucesso");
+          history.push("/");
+        });
+    } catch {
+      toast.error("Ocorreu um erro ao cadastrar!");
+    }
+  }
+
   return (
     <section className="container">
       <main className="content">
@@ -19,13 +55,43 @@ export function SignUp() {
               encontrarem os casos da sua ONG.
             </span>
           </div>
-          <form>
-            <Input type="text" placeholder="Nome da ONG" />
-            <Input type="email" placeholder="E-mail" />
-            <Input type="text" placeholder="WhatsApp" />
+          <form onSubmit={handleCreateOng}>
+            <Input
+              type="text"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Nome da ONG"
+            />
+            <Input
+              type="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="E-mail"
+            />
+            <Input
+              type="text"
+              name="whatsapp"
+              value={whatsapp}
+              onChange={(e) => setWhatsapp(e.target.value)}
+              placeholder="WhatsApp"
+            />
             <div>
-              <Input type="text" placeholder="Cidade" />
-              <Input type="text" placeholder="UF" />
+              <Input
+                type="text"
+                name="city"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                placeholder="Cidade"
+              />
+              <Input
+                type="text"
+                name="uf"
+                value={uf}
+                onChange={(e) => setUf(e.target.value)}
+                placeholder="UF"
+              />
             </div>
 
             <Button type="submit">Cadastrar</Button>
