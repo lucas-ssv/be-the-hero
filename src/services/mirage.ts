@@ -27,6 +27,7 @@ type Case = {
   title: string;
   description: string;
   price: number;
+  organization_id: string;
 };
 
 export function makeServer({ environment }: MakeServerProps) {
@@ -47,10 +48,17 @@ export function makeServer({ environment }: MakeServerProps) {
         city: "São Paulo",
         uf: "SP",
       }),
+      case: Factory.extend<Partial<Case>>({
+        title: "Gata atropelada",
+        description:
+          "A Gata Smile foi atropelada por um carro no bairro Santana e teve que passar por uma cirurgia às pressas.",
+        price: 150,
+      }),
     },
 
     seeds(server) {
       server.create("organization");
+      server.create("case");
     },
 
     routes() {
@@ -91,8 +99,25 @@ export function makeServer({ environment }: MakeServerProps) {
         );
       });
 
-      this.get("/sessions", (schema, request) => {
-        return schema.all("session");
+      this.post("/organizations", (schema, request) => {
+        let attrs = JSON.parse(request.requestBody);
+        return schema.create("organization", attrs);
+      });
+
+      this.get("/cases", (schema, request) => {
+        return schema.all("case");
+      });
+
+      this.post("/cases", (schema, request) => {
+        let attrs = JSON.parse(request.requestBody);
+        return schema.create("case", attrs);
+      });
+
+      this.delete("/cases", (schema, request) => {
+        let attrs = JSON.parse(request.requestBody);
+        let caseData = schema.find("case", attrs.id)?.destroy();
+
+        return { caseData };
       });
     },
   });

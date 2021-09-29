@@ -2,12 +2,24 @@ import { CardBody } from "./CardBody";
 import { CardItem } from "./CardItem";
 import "../../styles/list.scss";
 
-export function ListCards() {
+interface ListCardsProps {
+  items: Case[];
+}
+
+interface Case {
+  id: string;
+  title: string;
+  description: string;
+  price: string;
+  organization_id: string;
+}
+
+export function ListCards({ items }: ListCardsProps) {
   return (
     <CardBody>
-      <CardItem />
-      <CardItem />
-      <CardItem />
+      {items?.map((item) => (
+        <CardItem key={item.id} caseData={item} />
+      ))}
     </CardBody>
   );
 }
