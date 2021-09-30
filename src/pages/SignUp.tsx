@@ -62,6 +62,7 @@ export function SignUp() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Nome da ONG"
+              required
             />
             <Input
               type="email"
@@ -69,6 +70,7 @@ export function SignUp() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="E-mail"
+              required
             />
             <Input
               type="text"
@@ -84,6 +86,7 @@ export function SignUp() {
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 placeholder="Cidade"
+                required
               />
               <Input
                 type="text"
@@ -91,6 +94,7 @@ export function SignUp() {
                 value={uf}
                 onChange={(e) => setUf(e.target.value)}
                 placeholder="UF"
+                required
               />
             </div>
 
