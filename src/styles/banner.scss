@@ -1,3 +1,9 @@
 .banner {
   background: url("../assets/peoples.svg") no-repeat right;
 }
+
+@media (max-width: 900px) {
+  .banner {
+    background: none;
+  }
+}

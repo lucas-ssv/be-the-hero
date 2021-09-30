@@ -4,6 +4,39 @@
   align-items: center;
 }
 
+@media (max-width: 1100px) {
+  .box {
+    display: block !important;
+    padding: 2.5rem !important;
+
+    img {
+      width: 120px !important;
+      margin-bottom: 1.5rem !important;
+    }
+
+    form {
+      display: flex !important;
+      flex-direction: column;
+    }
+
+    a {
+      margin-top: 2rem !important;
+    }
+  }
+
+  .content {
+    display: block;
+  }
+}
+
+@media (max-width: 700px) {
+  form {
+    div {
+      grid-template-columns: 75% 24% !important;
+    }
+  }
+}
+
 .box {
   width: 100%;
   background: var(--background);

@@ -4,6 +4,16 @@
   grid-template-columns: 2fr 4fr;
 }
 
+@media (max-width: 900px) {
+  .gridWrapper {
+    display: block;
+  }
+
+  .logon {
+    height: 100%;
+  }
+}
+
 .logon {
   display: flex;
   flex-direction: column;
