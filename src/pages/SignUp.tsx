@@ -78,6 +78,7 @@ export function SignUp() {
               value={whatsapp}
               onChange={(e) => setWhatsapp(e.target.value)}
               placeholder="WhatsApp"
+              required
             />
             <div>
               <Input
