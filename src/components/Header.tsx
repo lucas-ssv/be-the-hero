@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import { FiPower } from "react-icons/fi";
 import logo from "../assets/logo.svg";
 import "../styles/header.scss";
 import "../styles/common.scss";
 import { AuthContext } from "../contexts/AuthContext";
 
-export function Header() {
+function HeaderComponent() {
   const { organization, signOut } = useContext(AuthContext);
 
   return (
@@ -26,3 +26,5 @@ export function Header() {
     </header>
   );
 }
+
+export const Header = memo(HeaderComponent);
