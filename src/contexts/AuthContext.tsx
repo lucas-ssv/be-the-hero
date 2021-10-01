@@ -71,7 +71,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           setIsAuthenticated(true);
         });
     } catch {
-      console.log("Ocorreu um erro");
+      toast.error("Ocorreu um erro ao fazer login");
     }
   }
 

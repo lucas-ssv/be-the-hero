@@ -78,7 +78,7 @@ export function CaseProvider({ children }: CaseProviderProps) {
           }
         });
     } catch {
-      console.log("Ocorreu um erro ao excluir caso");
+      toast.error("Ocorreu um erro ao excluir caso");
     }
   }
 
